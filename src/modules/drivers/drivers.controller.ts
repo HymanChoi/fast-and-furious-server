@@ -17,28 +17,48 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 export class DriversController {
   constructor(private readonly driversService: DriversService) {}
 
-  // POST /drivers
+  /**
+   * POST /drivers
+   *
+   * @param createDriverDto
+   * @returns
+   */
   @Post()
   @ApiOperation({ summary: '新增车手' })
   create(@Body() createDriverDto: CreateDriverDto) {
     return this.driversService.create(createDriverDto);
   }
 
-  // GET /drivers
+  /**
+   * GET /drivers
+   *
+   * @returns
+   */
   @Get()
   @ApiOperation({ summary: '获取所有车手' })
   findAll() {
     return this.driversService.findAll();
   }
 
-  // GET /drivers/:name
+  /**
+   * GET /drivers/:name
+   *
+   * @param name
+   * @returns
+   */
   @Get(':name')
   @ApiOperation({ summary: '获取单个车手' })
   async findOne(@Param('name') name: string) {
     return await this.driversService.findOne(name);
   }
 
-  // Patch /drivers/:name
+  /**
+   * Patch /drivers/:name
+   *
+   * @param name
+   * @param updateDriverDto
+   * @returns
+   */
   @Patch(':name')
   @ApiOperation({ summary: '编辑车手' })
   update(
@@ -48,7 +68,12 @@ export class DriversController {
     return this.driversService.update(name, updateDriverDto);
   }
 
-  // Delete /drivers/:name
+  /**
+   * Delete /drivers/:name
+   *
+   * @param name
+   * @returns
+   */
   @Delete(':name')
   @ApiOperation({ summary: '删除车手' })
   remove(@Param('name') name: string) {

@@ -5,58 +5,55 @@ export class DriversEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '名称' })
   name: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '名' })
   first_name: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '姓' })
   last_name: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '出生日期' })
   birth_date: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '年龄' })
   age: string;
 
-  @Column('text')
-  date_of_birth: string;
-
-  @Column('text')
+  @Column({ type: 'text', comment: '国籍' })
   nationality: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '国家' })
   country: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '国旗图片' })
   icn_flag_img: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '出生地点' })
   place_of_birth: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '号码' })
   driver_number: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '当前车队' })
   team: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '头像' })
   avatar: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '个人照' })
   img: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '登上领奖台次数' })
   podiums: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '累计获得分数' })
   points: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '进入大奖赛次数' })
   grands_prix_entered: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '总冠军次数' })
   world_championships: string;
 
   @Column('text')
@@ -71,6 +68,6 @@ export class DriversEntity {
   @Column('json')
   pole_positions_list: string;
 
-  @Column('json')
+  @Column({ type: 'json', comment: '生涯效力车队' })
   teams: string;
 }

@@ -29,14 +29,25 @@ export class DriversService {
    * @param name 名称
    * @returns
    */
-  async findOne(name: string) {
-    const sql = `SELECT * FROM drivers WHERE name = '${name}'`;
+  async findOne(name: string): Promise<any | undefined> {
+    const sql = `
+      SELECT * 
+      FROM drivers 
+      WHERE name = '${name}'
+    `;
     try {
-      const user = await this.driversRepository.query(sql);
-      return user[0];
+      const user = (await this.driversRepository.query(sql))[0] || 'undefined';
+      return {
+        statusCode: 200,
+        message: 'success',
+        data: user,
+      };
     } catch (error) {
-      console.error(error);
-      return void 0;
+      return {
+        statusCode: 500,
+        message: 'server error',
+        data: error,
+      };
     }
   }
 
