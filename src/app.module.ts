@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DriversModule } from './modules/drivers/drivers.module';
 import { TeamsModule } from './modules/teams/teams.module';
 import { SchedulesModule } from './modules/schedules/schedules.module';
-import db from './config/database';
+import db from './database';
 
 @Module({
   imports: [
