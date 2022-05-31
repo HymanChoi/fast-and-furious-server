@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DriversModule } from './modules/drivers/drivers.module';
 import { TeamsModule } from './modules/teams/teams.module';
 import { SchedulesModule } from './modules/schedules/schedules.module';
+import { DriverStandingsModule } from './modules/driver-standings/driver-standings.module';
+import { TeamStandingsModule } from './modules/team-standings/team-standings.module';
 import db from './database';
 
 @Module({
@@ -21,6 +23,8 @@ import db from './database';
     DriversModule,
     TeamsModule,
     SchedulesModule,
+    DriverStandingsModule,
+    TeamStandingsModule,
   ],
   controllers: [],
   providers: [],
