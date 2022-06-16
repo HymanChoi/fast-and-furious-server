@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
-
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { DriverStandingEntity } from './entities/driver-standing.entity';
-
 import { CreateDriverStandingDto } from './dto/create-driver-standing.dto';
 import { UpdateDriverStandingDto } from './dto/update-driver-standing.dto';
+import { resError, resSuccess } from 'src/utils/response';
 
 @Injectable()
 export class DriverStandingsService {
@@ -19,8 +18,13 @@ export class DriverStandingsService {
    *
    * @returns
    */
-  findAll() {
-    return `This action returns all driverStandings`;
+  async findAll() {
+    try {
+      const driverStandings = await this.driverStandingRepository.find();
+      return resSuccess(driverStandings);
+    } catch (error) {
+      return resError(error);
+    }
   }
 
   /**
@@ -30,39 +34,61 @@ export class DriverStandingsService {
    * @returns
    */
   async findOne(year: number) {
-    const sql = `
-      SELECT * 
-      FROM driver_standings
-      WHERE year = '${year}'
-    `;
     try {
-      const driverStanding =
-        (await this.driverStandingRepository.query(sql))[0] || 'undefined';
-      return {
-        statusCode: 200,
-        message: 'success',
-        data: driverStanding,
-      };
+      const driverStanding = await this.driverStandingRepository.findOne({
+        where: { year },
+      });
+      return resSuccess(driverStanding);
     } catch (error) {
-      return {
-        statusCode: 500,
-        message: 'server error',
-        data: error,
-      };
+      return resError(error);
     }
   }
 
-  create(createDriverStandingDto: CreateDriverStandingDto) {
-    console.log(createDriverStandingDto);
-    return 'This action adds a new driverStanding';
+  /**
+   * 新增单个年份车手排名
+   *
+   * @param createDriverStandingDto
+   * @returns
+   */
+  async create(createDriverStandingDto: CreateDriverStandingDto) {
+    try {
+      await this.driverStandingRepository.save(createDriverStandingDto);
+      return resSuccess('新增成功');
+    } catch (error) {
+      return resError(error);
+    }
   }
 
-  update(year: number, updateDriverStandingDto: UpdateDriverStandingDto) {
-    console.log(updateDriverStandingDto);
-    return `This action updates a #${year} driverStanding`;
+  /**
+   * 编辑单个年份车手排名
+   *
+   * @param updateDriverStandingDto
+   * @returns
+   */
+  async update(updateDriverStandingDto: UpdateDriverStandingDto) {
+    try {
+      await this.driverStandingRepository.update(
+        updateDriverStandingDto.year,
+        updateDriverStandingDto,
+      );
+      return resSuccess('编辑成功');
+    } catch (error) {
+      return resError(error);
+    }
   }
 
-  remove(year: number) {
-    return `This action removes a #${year} driverStanding`;
+  /**
+   * 删除单个年份车手排名
+   *
+   * @param year
+   * @returns
+   */
+  async remove(year: number) {
+    try {
+      await this.driverStandingRepository.delete(year);
+      return resSuccess('删除成功');
+    } catch (error) {
+      return resError(error);
+    }
   }
 }

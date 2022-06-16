@@ -37,13 +37,10 @@ export class DriverStandingsController {
     return this.driverStandingsService.findOne(year);
   }
 
-  @Patch(':year')
+  @Patch()
   @ApiOperation({ summary: '编辑车手排名' })
-  update(
-    @Param('year') year: number,
-    @Body() updateDriverStandingDto: UpdateDriverStandingDto,
-  ) {
-    return this.driverStandingsService.update(year, updateDriverStandingDto);
+  update(@Body() updateDriverStandingDto: UpdateDriverStandingDto) {
+    return this.driverStandingsService.update(updateDriverStandingDto);
   }
 
   @Delete(':year')

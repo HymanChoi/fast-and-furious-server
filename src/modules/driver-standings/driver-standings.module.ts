@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { DriverStandingsService } from './driver-standings.service';
 import { DriverStandingsController } from './driver-standings.controller';
-
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { DriverStandingEntity } from './entities/driver-standing.entity';
 
 @Module({
