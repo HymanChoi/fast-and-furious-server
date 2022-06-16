@@ -28,14 +28,20 @@ async function bootstrap() {
   // 过滤处理 HTTP 异常
   app.useGlobalFilters(new HttpExceptionFilter());
 
-  const options = new DocumentBuilder()
+  const config = new DocumentBuilder()
     .addBasicAuth()
     .setTitle('API')
     .setDescription('This is the api for fast and furious.')
     .setVersion('1.0')
     .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api-doc', app, document);
+  const document = SwaggerModule.createDocument(app, config);
+  const options = {
+    swaggerOptions: {
+      tagsSorter: 'method',
+      operationsSorter: 'method',
+    },
+  };
+  SwaggerModule.setup('api-doc', app, document, options);
 
   await app.listen(3000);
 }

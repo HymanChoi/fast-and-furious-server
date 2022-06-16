@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DriversModule } from './modules/drivers/drivers.module';
 import { TeamsModule } from './modules/teams/teams.module';
