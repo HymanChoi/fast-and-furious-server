@@ -1,26 +1,93 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { TeamEntity } from './entities/team.entity';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
+import { resError, resSuccess } from 'src/utils/response';
 
 @Injectable()
 export class TeamsService {
-  create(createTeamDto: CreateTeamDto) {
-    return 'This action adds a new team';
+  constructor(
+    @InjectRepository(TeamEntity)
+    private readonly teamRepository: Repository<TeamEntity>,
+  ) {}
+
+  /**
+   * 获取所有车队信息
+   *
+   * @returns
+   */
+  async findAll() {
+    try {
+      const teams = await this.teamRepository.find();
+      return resSuccess(teams);
+    } catch (error) {
+      return resError(error);
+    }
   }
 
-  findAll() {
-    return `This action returns all teams`;
+  /**
+   * 获取单个车队信息
+   *
+   * @param name
+   * @returns
+   */
+  async findOne(name: string) {
+    try {
+      const team = await this.teamRepository.findOne({
+        where: {
+          name,
+        },
+      });
+      return resSuccess(team);
+    } catch (error) {
+      return resError(error);
+    }
   }
 
-  findOne(name: string) {
-    return `This action returns a #${name} team`;
+  /**
+   * 新增车队
+   *
+   * @param createTeamDto
+   * @returns
+   */
+  async create(createTeamDto: CreateTeamDto) {
+    try {
+      await this.teamRepository.save(createTeamDto);
+      return resSuccess('新增成功');
+    } catch (error) {
+      return resError(error);
+    }
   }
 
-  update(name: string, updateTeamDto: UpdateTeamDto) {
-    return `This action updates a #${name} team`;
+  /**
+   * 编辑车队
+   *
+   * @param updateTeamDto
+   * @returns
+   */
+  async update(updateTeamDto: UpdateTeamDto) {
+    try {
+      await this.teamRepository.update(updateTeamDto.id, updateTeamDto);
+      return resSuccess('编辑成功');
+    } catch (error) {
+      return resError(error);
+    }
   }
 
-  remove(name: string) {
-    return `This action removes a #${name} team`;
+  /**
+   * 删除车队
+   *
+   * @param name
+   * @returns
+   */
+  async remove(name: string) {
+    try {
+      await this.teamRepository.delete({ name });
+      return resSuccess('删除成功');
+    } catch (error) {
+      return resError(error);
+    }
   }
 }

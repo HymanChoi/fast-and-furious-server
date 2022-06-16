@@ -35,10 +35,10 @@ export class TeamsController {
     return this.teamsService.findOne(name);
   }
 
-  @Patch(':name')
+  @Patch()
   @ApiOperation({ summary: '编辑车队' })
-  update(@Param('name') name: string, @Body() updateTeamDto: UpdateTeamDto) {
-    return this.teamsService.update(name, updateTeamDto);
+  update(@Body() updateTeamDto: UpdateTeamDto) {
+    return this.teamsService.update(updateTeamDto);
   }
 
   @Delete(':name')
