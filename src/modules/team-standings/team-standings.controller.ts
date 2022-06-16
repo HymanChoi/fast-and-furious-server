@@ -34,22 +34,19 @@ export class TeamStandingsController {
 
   @Get(':year')
   @ApiOperation({ summary: '获取单个年份车队排名' })
-  findOne(@Param('year') year: string) {
+  findOne(@Param('year') year: number) {
     return this.teamStandingsService.findOne(year);
   }
 
-  @Patch(':year')
+  @Patch()
   @ApiOperation({ summary: '编辑车队排名' })
-  update(
-    @Param('year') year: string,
-    @Body() updateTeamStandingDto: UpdateTeamStandingDto,
-  ) {
-    return this.teamStandingsService.update(year, updateTeamStandingDto);
+  update(@Body() updateTeamStandingDto: UpdateTeamStandingDto) {
+    return this.teamStandingsService.update(updateTeamStandingDto);
   }
 
   @Delete(':year')
   @ApiOperation({ summary: '删除车队排名' })
-  remove(@Param('year') year: string) {
+  remove(@Param('year') year: number) {
     return this.teamStandingsService.remove(year);
   }
 }

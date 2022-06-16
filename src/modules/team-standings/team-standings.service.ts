@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
-
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TeamStandingEntity } from './entities/team-standing.entity';
-
 import { CreateTeamStandingDto } from './dto/create-team-standing.dto';
 import { UpdateTeamStandingDto } from './dto/update-team-standing.dto';
+import { resError, resSuccess } from 'src/utils/response';
 
 @Injectable()
 export class TeamStandingsService {
@@ -19,8 +18,13 @@ export class TeamStandingsService {
    *
    * @returns
    */
-  findAll() {
-    return `This action returns all teamStandings`;
+  async findAll() {
+    try {
+      const teamStandings = await this.teamStandingRepository.find();
+      return resSuccess(teamStandings);
+    } catch (error) {
+      return resError(error);
+    }
   }
 
   /**
@@ -29,40 +33,62 @@ export class TeamStandingsService {
    * @param year
    * @returns
    */
-  async findOne(year: string) {
-    const sql = `
-      SELECT * 
-      FROM team_standings
-      WHERE year = '${year}'
-    `;
+  async findOne(year: number) {
     try {
-      const teamStanding =
-        (await this.teamStandingRepository.query(sql))[0] || 'undefined';
-      return {
-        statusCode: 200,
-        message: 'success',
-        data: teamStanding,
-      };
+      const teamStanding = await this.teamStandingRepository.findOne({
+        where: { year },
+      });
+      return resSuccess(teamStanding);
     } catch (error) {
-      return {
-        statusCode: 500,
-        message: 'server error',
-        data: error,
-      };
+      return resError(error);
     }
   }
 
-  create(createTeamStandingDto: CreateTeamStandingDto) {
-    console.log(createTeamStandingDto);
-    return 'This action adds a new teamStanding';
+  /**
+   * 新增单个年份车队排名
+   *
+   * @param createTeamStandingDto
+   * @returns
+   */
+  async create(createTeamStandingDto: CreateTeamStandingDto) {
+    try {
+      await this.teamStandingRepository.save(createTeamStandingDto);
+      return resSuccess('新增成功');
+    } catch (error) {
+      return resError(error);
+    }
   }
 
-  update(year: string, updateTeamStandingDto: UpdateTeamStandingDto) {
-    console.log(updateTeamStandingDto);
-    return `This action updates a #${year} teamStanding`;
+  /**
+   * 编辑单个年份车队排名
+   *
+   * @param updateTeamStandingDto
+   * @returns
+   */
+  async update(updateTeamStandingDto: UpdateTeamStandingDto) {
+    try {
+      await this.teamStandingRepository.update(
+        updateTeamStandingDto.year,
+        updateTeamStandingDto,
+      );
+      return resSuccess('编辑成功');
+    } catch (error) {
+      return resError(error);
+    }
   }
 
-  remove(year: string) {
-    return `This action removes a #${year} teamStanding`;
+  /**
+   * 删除单个年份车队排名
+   *
+   * @param year
+   * @returns
+   */
+  async remove(year: number) {
+    try {
+      await this.teamStandingRepository.delete(year);
+      return resSuccess('删除成功');
+    } catch (error) {
+      return resError(error);
+    }
   }
 }
