@@ -28,20 +28,17 @@ export class SchedulesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.schedulesService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.schedulesService.findOne(id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateScheduleDto: UpdateScheduleDto,
-  ) {
-    return this.schedulesService.update(+id, updateScheduleDto);
+  @Patch()
+  update(@Body() updateScheduleDto: UpdateScheduleDto) {
+    return this.schedulesService.update(updateScheduleDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.schedulesService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.schedulesService.remove(id);
   }
 }
