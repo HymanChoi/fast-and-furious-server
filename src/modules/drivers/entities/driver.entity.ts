@@ -1,8 +1,35 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+class DriverWinsListItem {
+  @Column({ type: 'text', comment: 'ID' })
+  id: string;
+
+  @Column({ type: 'text', comment: '车队' })
+  team: string;
+
+  @Column({ type: 'text', comment: '赛事' })
+  event: string;
+
+  @Column({ type: 'text', comment: '轮次' })
+  round: string;
+}
+
+class DriverPolePositionsListItem extends DriverWinsListItem {}
+
+class DriverTeamsItem {
+  @Column({ type: 'text', comment: '车队名称' })
+  team: string;
+
+  @Column({ type: 'text', comment: '赛季' })
+  season: string;
+
+  @Column({ type: 'json', comment: '队友' })
+  teammate: string[];
+}
+
 @Entity('drivers')
-export class DriversEntity {
-  @PrimaryGeneratedColumn()
+export class DriverEntity {
+  @PrimaryGeneratedColumn({ type: 'int', comment: 'ID' })
   id: number;
 
   @Column({ type: 'text', comment: '名称' })
@@ -56,18 +83,18 @@ export class DriversEntity {
   @Column({ type: 'text', comment: '总冠军次数' })
   world_championships: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '最快圈速' })
   highest_race_finish: string;
 
-  @Column('text')
+  @Column({ type: 'text', comment: '最好名次' })
   highest_grid_position: string;
 
-  @Column('json')
-  wins_list: string;
+  @Column({ type: 'json', comment: '获胜信息列表' })
+  wins_list: DriverWinsListItem[];
 
-  @Column('json')
-  pole_positions_list: string;
+  @Column({ type: 'json', comment: '杆位信息列表' })
+  pole_positions_list: DriverPolePositionsListItem[];
 
   @Column({ type: 'json', comment: '生涯效力车队' })
-  teams: string;
+  teams: DriverTeamsItem[];
 }
