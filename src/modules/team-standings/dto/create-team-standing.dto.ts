@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
-class Team {
+class TeamStandingListItem {
   @ApiProperty({ description: '车队名称' })
   team: string;
 
@@ -18,10 +18,10 @@ export class CreateTeamStandingDto {
   readonly year: number;
 
   @ApiProperty({
-    type: () => Team,
+    type: () => TeamStandingListItem,
     isArray: true,
     description: '数据',
   })
   @IsNotEmpty({ message: '数据不能为空' })
-  readonly list: Team[];
+  readonly list: TeamStandingListItem[];
 }

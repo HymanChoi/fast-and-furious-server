@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-class Driver {
+class TeamDriversItem {
   @ApiProperty({ description: '名称' })
   name: string;
 
@@ -66,9 +66,9 @@ export class CreateTeamDto {
   technical_chief: string[];
 
   @ApiProperty({
-    type: () => Driver,
+    type: () => TeamDriversItem,
     isArray: true,
     description: '车手',
   })
-  drivers: Driver[];
+  drivers: TeamDriversItem[];
 }

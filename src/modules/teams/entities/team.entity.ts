@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-class Driver {
+class TeamDriversItem {
   @Column({ type: 'text', comment: '名称' })
   name: string;
 
@@ -59,5 +59,5 @@ export class TeamEntity {
   technical_chief: string[];
 
   @Column({ type: 'json', comment: '车手' })
-  drivers: Driver[];
+  drivers: TeamDriversItem[];
 }

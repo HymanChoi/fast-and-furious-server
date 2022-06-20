@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-class Team {
+class TeamStandingListItem {
   @Column({ type: 'text', comment: '车队名称' })
   team: string;
 
@@ -17,5 +17,5 @@ export class TeamStandingEntity {
   year: number;
 
   @Column({ type: 'json', comment: '数据' })
-  list: Team[];
+  list: TeamStandingListItem[];
 }
