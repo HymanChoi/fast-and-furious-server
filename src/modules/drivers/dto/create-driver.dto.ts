@@ -49,6 +49,72 @@ export class CreateDriverDto {
   @ApiProperty({ description: '国籍' })
   nationality: string;
 
+  @ApiProperty({
+    type: () => DriverWinsListItem,
+    isArray: true,
+    description: '获胜信息列表',
+  })
+  wins_list: DriverWinsListItem[];
+
+  @ApiProperty({
+    type: () => DriverPolePositionsListItem,
+    isArray: true,
+    description: '杆位信息列表',
+  })
+  pole_positions_list: DriverPolePositionsListItem[];
+
+  @ApiProperty({
+    type: () => DriverTeamsItem,
+    isArray: true,
+    description: '生涯效力车队',
+  })
+  teams: DriverTeamsItem[];
+
+  @ApiProperty({ description: '' })
+  wins: string;
+
+  @ApiProperty({ description: '登上领奖台次数' })
+  podiums: string;
+
+  @ApiProperty({ description: '' })
+  pole_positions: string;
+
+  @ApiProperty({ description: '' })
+  championships: string;
+
+  @ApiProperty({ description: '' })
+  best_result: string;
+
+  @ApiProperty({ description: '' })
+  best_grid_position: string;
+
+  @ApiProperty({ description: '' })
+  seasons: string;
+
+  @ApiProperty({ description: '' })
+  events: string;
+
+  @ApiProperty({ description: '' })
+  starts: string;
+
+  @ApiProperty({ description: '累计获得分数' })
+  points: string;
+
+  @ApiProperty({ description: '' })
+  laps_raced: string;
+
+  @ApiProperty({ description: '' })
+  laps_led: string;
+
+  @ApiProperty({ description: '' })
+  fastest_laps: string;
+
+  @ApiProperty({ description: '' })
+  retirements: string;
+
+  /**
+   * 官网数据
+   */
   @ApiProperty({ description: '国家' })
   country: string;
 
@@ -70,12 +136,6 @@ export class CreateDriverDto {
   @ApiProperty({ description: '个人照' })
   img: string;
 
-  @ApiProperty({ description: '登上领奖台次数' })
-  podiums: string;
-
-  @ApiProperty({ description: '累计获得分数' })
-  points: string;
-
   @ApiProperty({ description: '进入大奖赛次数' })
   grands_prix_entered: string;
 
@@ -87,25 +147,4 @@ export class CreateDriverDto {
 
   @ApiProperty({ description: '最好名次' })
   highest_grid_position: string;
-
-  @ApiProperty({
-    type: () => DriverWinsListItem,
-    isArray: true,
-    description: '获胜信息列表',
-  })
-  wins_list: DriverWinsListItem[];
-
-  @ApiProperty({
-    type: () => DriverPolePositionsListItem,
-    isArray: true,
-    description: '杆位信息列表',
-  })
-  pole_positions_list: DriverPolePositionsListItem[];
-
-  @ApiProperty({
-    type: () => DriverTeamsItem,
-    isArray: true,
-    description: '生涯效力车队',
-  })
-  teams: DriverTeamsItem[];
 }

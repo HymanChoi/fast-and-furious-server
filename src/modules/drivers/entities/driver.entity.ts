@@ -50,6 +50,60 @@ export class DriverEntity {
   @Column({ type: 'text', comment: '国籍' })
   nationality: string;
 
+  @Column({ type: 'json', comment: '获胜信息列表' })
+  wins_list: DriverWinsListItem[];
+
+  @Column({ type: 'json', comment: '杆位信息列表' })
+  pole_positions_list: DriverPolePositionsListItem[];
+
+  @Column({ type: 'json', comment: '生涯效力车队' })
+  teams: DriverTeamsItem[];
+
+  @Column({ type: 'text', comment: '' })
+  wins: string;
+
+  @Column({ type: 'text', comment: '登上领奖台次数' })
+  podiums: string;
+
+  @Column({ type: 'text', comment: '' })
+  pole_positions: string;
+
+  @Column({ type: 'text', comment: '' })
+  championships: string;
+
+  @Column({ type: 'text', comment: '' })
+  best_result: string;
+
+  @Column({ type: 'text', comment: '' })
+  best_grid_position: string;
+
+  @Column({ type: 'text', comment: '' })
+  seasons: string;
+
+  @Column({ type: 'text', comment: '' })
+  events: string;
+
+  @Column({ type: 'text', comment: '' })
+  starts: string;
+
+  @Column({ type: 'text', comment: '累计获得分数' })
+  points: string;
+
+  @Column({ type: 'text', comment: '' })
+  laps_raced: string;
+
+  @Column({ type: 'text', comment: '' })
+  laps_led: string;
+
+  @Column({ type: 'text', comment: '' })
+  fastest_laps: string;
+
+  @Column({ type: 'text', comment: '' })
+  retirements: string;
+
+  /**
+   * 官网数据
+   */
   @Column({ type: 'text', comment: '国家' })
   country: string;
 
@@ -71,12 +125,6 @@ export class DriverEntity {
   @Column({ type: 'text', comment: '个人照' })
   img: string;
 
-  @Column({ type: 'text', comment: '登上领奖台次数' })
-  podiums: string;
-
-  @Column({ type: 'text', comment: '累计获得分数' })
-  points: string;
-
   @Column({ type: 'text', comment: '进入大奖赛次数' })
   grands_prix_entered: string;
 
@@ -88,13 +136,4 @@ export class DriverEntity {
 
   @Column({ type: 'text', comment: '最好名次' })
   highest_grid_position: string;
-
-  @Column({ type: 'json', comment: '获胜信息列表' })
-  wins_list: DriverWinsListItem[];
-
-  @Column({ type: 'json', comment: '杆位信息列表' })
-  pole_positions_list: DriverPolePositionsListItem[];
-
-  @Column({ type: 'json', comment: '生涯效力车队' })
-  teams: DriverTeamsItem[];
 }
