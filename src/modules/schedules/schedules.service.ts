@@ -14,13 +14,15 @@ export class SchedulesService {
   ) {}
 
   /**
-   * 获取所有场次
+   * 获取整年所有场次
    *
    * @returns
    */
-  async findAll() {
+  async find(query: { year: string }) {
     try {
-      const schedules = await this.scheduleRepository.find();
+      const schedules = await this.scheduleRepository.find({
+        where: { year: query.year },
+      });
       return resSuccess(schedules);
     } catch (error) {
       return resError(error);
